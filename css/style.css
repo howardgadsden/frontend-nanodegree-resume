@@ -104,6 +104,10 @@ a {
   display: none;
 }
 
+.flex-item {
+  display: inline;
+}
+
 .orange {
   background-color: #f5ae23;
 }
@@ -137,7 +141,8 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+/*  justify-content: space-around; */
+display: block;
   padding: 10px;
 }
 

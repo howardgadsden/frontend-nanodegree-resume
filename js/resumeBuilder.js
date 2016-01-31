@@ -12,7 +12,7 @@ var bio = {
         "location": "North Salem, NY, US"
     },
     "pictureURL": "https://chasemeadowsfarm.files.wordpress.com/2015/09/headshot.jpg",
-    "skills": ["Programming", "Software Management"]
+    "skills": ["Programming", "Technology Management"]
 }
 
 var education = {
@@ -71,50 +71,49 @@ var projects = {
 		"title": "About Me",
 		"dates": "November 11 - 16",
 		"description": "First Udacity project",
-		"images": [
-			{"image": "C:\Users\barba_000\Documents\GitHub\version-control\frontend-nanodegree-resume\images\Balloon.jpg"}]
+		"image": "images/Balloon380x265.jpg?w=135h=165"
 		},
 		{
 		"title": "Project 1",
 		"dates": "November 16 - 18",
 		"description": "Second Udacity project",
-		"images": [
-			{"image": "C:\Users\barba_000\Documents\GitHub\version-control\frontend-nanodegree-resume\images\honeycomb380x300.jpg"}]
+		"image": "images/honeycomb380x300.png"
 		}
 	]
 }
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-console.log(formattedName);
-console.log(formattedRole);
+bio.display = function() {
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
+	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
-$("#header").prepend([formattedRole]);
-$("#header").prepend([formattedName]);
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.pictureURL);
+	$("#header").prepend([formattedRole]);
+	$("#header").prepend([formattedName]);
 
+	var formattedBioPic = HTMLbioPic.replace("%data%", bio.pictureURL);
 
-var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
-$("#header").append(formattedLocation);
-$("#header").append(formattedMobile);
-$("#header").append(formattedEmail);
-$("#header").append(formattedGithub);
-$("#header").append(formattedTwitter);
-$("#header").append(formattedBioPic);
+	$("#header").append(formattedLocation);
+	$("#header").append(formattedMobile);
+	$("#header").append(formattedEmail);
+	$("#header").append(formattedGithub);
+	$("#header").append(formattedTwitter);
+	$("#header").append(formattedBioPic);
 
-if (bio.skills.length > 0){
-	$("#header").append(HTMLskillsStart);
-	for(skill in bio.skills){
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
-		$("#skills").append(formattedSkill);
+	if (bio.skills.length > 0){
+		$("#header").append(HTMLskillsStart);
+		for(skill in bio.skills){
+			var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+			$("#skills").append(formattedSkill);
+		}
 	}
 }
-function displayWork(){
+
+work.display = function(){
 for(job in work.jobs){
 	if(work.jobs[job].employer){
 		$("#workExperience").append(HTMLworkStart);
@@ -131,7 +130,7 @@ for(job in work.jobs){
   	}
 }
 }
-displayWork();
+
 
 $(document).click(function(loc) {
 	var x = loc.pageX;
@@ -161,13 +160,15 @@ projects.display = function () {
 		formattedOutput = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 		$(".project-entry:last").append(formattedOutput);
 
-		if(projects.projects[project].images.length > 0){
-			for(image in projects.projects[project].images){
-				var	formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-				$(".project-entry:last").append(formattedImage);
-				}
-			}
+		var	formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].image);
+				console.log(projects.projects[project].image);
+				console.log(formattedImage);
+		$(".project-entry:last").append(formattedImage);
 		}
-}
+	}
+
+
+bio.display();
+work.display();
 projects.display();
 $("#mapDiv").append(googleMap);
