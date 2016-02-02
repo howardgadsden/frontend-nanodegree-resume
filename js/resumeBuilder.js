@@ -10,7 +10,7 @@ var bio = {
         "twitter": "chasemeadows",
         "location": "North Salem, NY, US"
     },
-    "pictureURL": "https://chasemeadowsfarm.files.wordpress.com/2015/09/headshot.jpg",
+    "biopic": "https://chasemeadowsfarm.files.wordpress.com/2015/09/headshot.jpg",
     "skills": ["Programming", "Technology Management"]
 };
 
@@ -18,17 +18,32 @@ var education = {
     "schools": [{
         "name": "University of Massachusetts",
         "location": "Amherst, MA, US",
-        "major": [
-            "BS Electrical Engineering"
+        "majors": [
+            "Electrical Engineering"
         ],
-        "graduationYear": "1978"
+        "degree": "BSEE",
+        "dates": "1978",
+        "url": "http://www.massachusetts.edu/"
     }, {
         "name": "NYU-Polytechnic University",
         "location": "Brooklyn, NY, US",
-        "major": [
-            "MS Computer Science"
+        "majors": [
+            "Computer Science"
         ],
-        "graduationYear": "1985"
+        "degree": "MSCS",
+        "dates": "1985",
+        "url": "http://engineering.nyu.edu/"
+    }],
+    "onlineCourses": [{
+        "title": "JavaScript Basics Course",
+        "school": "Udacity",
+        "date": "Jan 2016",
+        "url": "https://www.udacity.com/course/viewer#!/c-ud804-nd"
+    }, {
+        "title": "Intro to JQuery",
+        "school": "Udacity",
+        "date": "Jan 2016",
+        "url": "https://www.udacity.com/course/ud245-nd"
     }]
 };
 
@@ -62,42 +77,47 @@ var projects = {
         "title": "About Me",
         "dates": "November 11 - 16",
         "description": "First Udacity project",
-        "image": "images/Balloon380x265.jpg?w=135h=165"
+        "images": [{
+           "image": "images/Balloon380x265.jpg?w=135h=165"
+        }]
     }, {
         "title": "Project 1",
         "dates": "November 16 - 18",
         "description": "Second Udacity project",
-        "image": "images/honeycomb380x300.png"
+        "images": [{
+            "image": "images/honeycomb380x300.png"
+        }]
     }]
 };
 
 bio.display = function() {
-    var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    var data = "%data%";
+    var $header = "#header";
+    var formattedName = HTMLheaderName.replace(data, bio.name);
+    var formattedRole = HTMLheaderRole.replace(data, bio.role);
+    $($header).prepend([formattedRole]);
+    $($header).prepend([formattedName]);
 
-    $("#header").prepend([formattedRole]);
-    $("#header").prepend([formattedName]);
+    var formattedBioPic = HTMLbioPic.replace(data, bio.biopic);
 
-    var formattedBioPic = HTMLbioPic.replace("%data%", bio.pictureURL);
+    var formattedMobile = HTMLmobile.replace(data, bio.contacts.mobile);
+    var formattedEmail = HTMLemail.replace(data, bio.contacts.email);
+    var formattedTwitter = HTMLtwitter.replace(data, bio.contacts.twitter);
+    var formattedGithub = HTMLgithub.replace(data, bio.contacts.github);
+    var formattedLocation = HTMLlocation.replace(data, bio.contacts.location);
 
-    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-
-    $("#header").append(formattedLocation);
-    $("#header").append(formattedMobile);
-    $("#header").append(formattedEmail);
-    $("#header").append(formattedGithub);
-    $("#header").append(formattedTwitter);
-    $("#header").append(formattedBioPic);
+    $($header).append(formattedLocation);
+    $($header).append(formattedMobile);
+    $($header).append(formattedEmail);
+    $($header).append(formattedGithub);
+    $($header).append(formattedTwitter);
+    $($header).append(formattedBioPic);
 
     if (bio.skills.length > 0) {
-        $("#header").append(HTMLskillsStart);
+        $($header).append(HTMLskillsStart);
         for (var skill in bio.skills) {
             if (bio.skills[skill].length > 0) {
-                var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+                var formattedSkill = HTMLskills.replace(data, bio.skills[skill]);
                 $("#skills").append(formattedSkill);
             }
         }
@@ -105,7 +125,7 @@ bio.display = function() {
 };
 
 work.display = function() {
-    for (var job in work.jobs) {
+    for (var job = 0; job < work.jobs.length; job++) {
         if (work.jobs[job].employer) {
             $("#workExperience").append(HTMLworkStart);
             var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -142,24 +162,32 @@ function inName(name) {
 $("#main").append(internationalizeButton);
 
 projects.display = function() {
-    for (var project in projects.projects) {
-        if (projects.projects.length > 0) {
-            $("#projects").append(HTMLprojectStart);
-            var formattedOutput = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-            $(".project-entry:last").append(formattedOutput);
-            formattedOutput = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-            $(".project-entry:last").append(formattedOutput);
-            formattedOutput = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-            $(".project-entry:last").append(formattedOutput);
-
-            var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].image);
-            console.log(projects.projects[project].image);
-            console.log(formattedImage);
-            $(".project-entry:last").append(formattedImage);
+    for (var project = 0; project < projects.projects.length; project++) {
+        $("#projects").append(HTMLprojectStart);
+        var formattedOutput = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+        $(".project-entry:last").append(formattedOutput);
+        formattedOutput = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+        $(".project-entry:last").append(formattedOutput);
+        formattedOutput = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+        $(".project-entry:last").append(formattedOutput);
+        var len = projects.projects[project].images.length;
+        console.log(len);
+        if (len > 0) {
+            for (var image = 0; image < len; image++ ) {
+                var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image].image);
+                console.log(projects.projects[project].images[image].image);
+                console.log(formattedImage);
+                $(".project-entry:last").append(formattedImage);
+            }
         }
     }
 };
 
+education.display = function() {
+    for (var school = 0; school < education.schools.length; school++) {
+
+    }
+};
 
 bio.display();
 work.display();
