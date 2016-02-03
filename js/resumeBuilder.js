@@ -78,7 +78,7 @@ var projects = {
         "dates": "November 11 - 16",
         "description": "First Udacity project",
         "images": [{
-           "image": "images/Balloon380x265.jpg?w=135h=165"
+            "image": "images/Balloon380x265.jpg?w=135h=165"
         }]
     }, {
         "title": "Project 1",
@@ -182,7 +182,7 @@ projects.display = function() {
         var len = projects.projects[project].images.length;
         console.log(len);
         if (len > 0) {
-            for (var image = 0; image < len; image++ ) {
+            for (var image = 0; image < len; image++) {
                 var formattedImage = HTMLprojectImage.replace(data, projects.projects[project].images[image].image);
                 console.log(projects.projects[project].images[image].image);
                 console.log(formattedImage);
@@ -197,33 +197,34 @@ education.display = function() {
     if (len > 0) {
         $("#education").append(HTMLschoolStart);
     }
+    var formattedOutput;
     for (var school = 0; school < len; school++) {
-        var formattedOutput = HTMLschoolName.replace(data, education.schools[school].name);
-         $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLschoolName.replace(data, education.schools[school].name);
+        $(".education-entry:last").append(formattedOutput);
         formattedOutput = HTMLschoolDates.replace(data, education.schools[school].dates);
         $(".education-entry:last").append(formattedOutput);
         formattedOutput = HTMLschoolDegree.replace(data, education.schools[school].degree);
         $(".education-entry:last").append(formattedOutput);
         formattedOutput = HTMLschoolLocation.replace(data, education.schools[school].location);
         $(".education-entry:last").append(formattedOutput);
-        for(var major = 0; major < education.schools[school].majors.length; major++) {
+        for (var major = 0; major < education.schools[school].majors.length; major++) {
             formattedOutput = HTMLschoolMajor.replace(data, education.schools[school].majors[major].major);
             $(".education-entry:last").append(formattedOutput);
         }
     }
     len = education.onlineCourses.length;
     if (len > 0) {
-         $(".education-entry:last").append(HTMLonlineClasses);
+        $(".education-entry:last").append(HTMLonlineClasses);
     }
     for (var course = 0; course < len; course++) {
-         var formattedOutput = HTMLonlineTitle.replace(data, education.onlineCourses[course].title);
-         $(".education-entry:last").append(formattedOutput);
-          var formattedOutput = HTMLonlineDates.replace(data, education.onlineCourses[course].date);
-         $(".education-entry:last").append(formattedOutput);
-         var formattedOutput = HTMLonlineSchool.replace(data, education.onlineCourses[course].school);
-         $(".education-entry:last").append(formattedOutput);
-         var formattedOutput = HTMLonlineURL.replace(data, education.onlineCourses[course].url);
-         $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLonlineTitle.replace(data, education.onlineCourses[course].title);
+        $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLonlineDates.replace(data, education.onlineCourses[course].date);
+        $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLonlineSchool.replace(data, education.onlineCourses[course].school);
+        $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLonlineURL.replace(data, education.onlineCourses[course].url);
+        $(".education-entry:last").append(formattedOutput);
     }
 };
 
