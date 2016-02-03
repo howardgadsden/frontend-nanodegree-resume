@@ -90,15 +90,10 @@ var projects = {
     }]
 };
 
-var data = "%data%";
-var formattedMobile = HTMLmobile.replace(data, bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace(data, bio.contacts.email);
-var formattedTwitter = HTMLtwitter.replace(data, bio.contacts.twitter);
-var formattedGithub = HTMLgithub.replace(data, bio.contacts.github);
-var formattedLocation = HTMLlocation.replace(data, bio.contacts.location);
+
 
 bio.display = function() {
-
+    var data = "%data%";
     var $header = "#header";
     var formattedName = HTMLheaderName.replace(data, bio.name);
     var formattedRole = HTMLheaderRole.replace(data, bio.role);
@@ -106,6 +101,11 @@ bio.display = function() {
     $($header).prepend([formattedName]);
 
     var formattedBioPic = HTMLbioPic.replace(data, bio.biopic);
+    var formattedMobile = HTMLmobile.replace(data, bio.contacts.mobile);
+    var formattedEmail = HTMLemail.replace(data, bio.contacts.email);
+    var formattedTwitter = HTMLtwitter.replace(data, bio.contacts.twitter);
+    var formattedGithub = HTMLgithub.replace(data, bio.contacts.github);
+    var formattedLocation = HTMLlocation.replace(data, bio.contacts.location);
 
     $($header).append(formattedLocation);
     $($header).append(formattedMobile);
@@ -124,9 +124,15 @@ bio.display = function() {
             }
         }
     }
+    $("#footerContacts").append(formattedLocation);
+    $("#footerContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedEmail);
+    $("#footerContacts").append(formattedGithub);
+    $("#footerContacts").append(formattedTwitter);
 };
 
 work.display = function() {
+    var data = "%data%";
     var len = work.jobs.length;
     if (len > 0) {
         $("#workExperience").append(HTMLworkStart);
@@ -167,8 +173,8 @@ function inName(name) {
 $("#main").append(internationalizeButton);
 
 projects.display = function() {
+    var data = "%data%";
     var numProj = projects.projects.length;
-    console.log(numProj);
     if (numProj > 0) {
         $("#projects").append(HTMLprojectStart);
     }
@@ -180,12 +186,9 @@ projects.display = function() {
         formattedOutput = HTMLprojectDescription.replace(data, projects.projects[project].description);
         $(".project-entry:last").append(formattedOutput);
         var len = projects.projects[project].images.length;
-        console.log(len);
         if (len > 0) {
             for (var image = 0; image < len; image++) {
                 var formattedImage = HTMLprojectImage.replace(data, projects.projects[project].images[image].image);
-                console.log(projects.projects[project].images[image].image);
-                console.log(formattedImage);
                 $(".project-entry:last").append(formattedImage);
             }
         }
@@ -193,6 +196,7 @@ projects.display = function() {
 };
 
 education.display = function() {
+    var data = "%data%";
     var len = education.schools.length;
     if (len > 0) {
         $("#education").append(HTMLschoolStart);
@@ -235,8 +239,3 @@ projects.display();
 education.display();
 $("#mapDiv").append(googleMap);
 
-$("#footerContacts").append(formattedLocation);
-$("#footerContacts").append(formattedMobile);
-$("#footerContacts").append(formattedEmail);
-$("#footerContacts").append(formattedGithub);
-$("#footerContacts").append(formattedTwitter);
