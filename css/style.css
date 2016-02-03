@@ -41,9 +41,10 @@ h2 {
 
 h3 {
   font-style: italic;
-  font-size: 20px;
+  font-size: 18px;
   color: #000;
   line-height: 22px;
+  padding: 0;
 }
 
 h4 {
@@ -54,13 +55,11 @@ h4 {
 }
 
 h2,
-h3,
 h4,
 h5 {
   padding:10px 5%;
 
 }
-
 
 .date-text {
   font-style: italic;
@@ -142,7 +141,7 @@ a {
   flex-direction: row;
   flex-wrap: wrap;
 /*  justify-content: space-around; */
-display: block;
+  display: block;
   padding: 10px;
 }
 
@@ -162,7 +161,7 @@ ul {
 }
 
 img {
-  padding: 10px;
+  padding: 20px;
 }
 
 span {

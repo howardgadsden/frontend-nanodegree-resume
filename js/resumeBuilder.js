@@ -199,10 +199,10 @@ education.display = function() {
     }
     for (var school = 0; school < len; school++) {
         var formattedOutput = HTMLschoolName.replace(data, education.schools[school].name);
+         $(".education-entry:last").append(formattedOutput);
+        formattedOutput = HTMLschoolDates.replace(data, education.schools[school].dates);
         $(".education-entry:last").append(formattedOutput);
         formattedOutput = HTMLschoolDegree.replace(data, education.schools[school].degree);
-        $(".education-entry:last").append(formattedOutput);
-        formattedOutput = HTMLschoolDates.replace(data, education.schools[school].dates);
         $(".education-entry:last").append(formattedOutput);
         formattedOutput = HTMLschoolLocation.replace(data, education.schools[school].location);
         $(".education-entry:last").append(formattedOutput);
@@ -210,9 +210,23 @@ education.display = function() {
             formattedOutput = HTMLschoolMajor.replace(data, education.schools[school].majors[major].major);
             $(".education-entry:last").append(formattedOutput);
         }
-
+    }
+    len = education.onlineCourses.length;
+    if (len > 0) {
+         $(".education-entry:last").append(HTMLonlineClasses);
+    }
+    for (var course = 0; course < len; course++) {
+         var formattedOutput = HTMLonlineTitle.replace(data, education.onlineCourses[course].title);
+         $(".education-entry:last").append(formattedOutput);
+          var formattedOutput = HTMLonlineDates.replace(data, education.onlineCourses[course].date);
+         $(".education-entry:last").append(formattedOutput);
+         var formattedOutput = HTMLonlineSchool.replace(data, education.onlineCourses[course].school);
+         $(".education-entry:last").append(formattedOutput);
+         var formattedOutput = HTMLonlineURL.replace(data, education.onlineCourses[course].url);
+         $(".education-entry:last").append(formattedOutput);
     }
 };
+
 
 bio.display();
 work.display();
