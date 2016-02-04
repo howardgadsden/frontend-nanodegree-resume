@@ -140,7 +140,6 @@ function initializeMap() {
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
     }
-console.log(locations);
     return locations;
   }
 
